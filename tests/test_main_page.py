@@ -1,4 +1,9 @@
 import time
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+
 def test_check_homepage_opencart(browser, base_url):
     browser.get(base_url)
     browser.find_element_by_css_selector('#logo')
@@ -21,6 +26,7 @@ def test_dekstop_menu(browser, base_url):
     browser.find_element_by_xpath("//a[@href='http://localhost/desktops/test'][1]").click()
     browser.find_element_by_css_selector("div#content h1").is_displayed()
 
+
 def test_card_product(browser, base_url):
     browser.get(base_url)
     browser.find_element_by_css_selector("div#search > input[name='search']").clear()
@@ -28,6 +34,7 @@ def test_card_product(browser, base_url):
     browser.find_element_by_css_selector(".btn.btn-default.btn-lg").click()
     browser.find_element_by_css_selector("div#content > h2").is_displayed()
     browser.find_element_by_css_selector("h4 > a").click()
+
 
 def test_account_login(browser, base_url):
     browser.get(base_url)
@@ -38,6 +45,7 @@ def test_account_login(browser, base_url):
     browser.find_element_by_css_selector("#input-password").clear()
     browser.find_element_by_css_selector("#input-password").send_keys("1436474757")
 
+
 def test_admin_page(browser, base_url):
     browser.get(f"{base_url}/admin/")
     browser.find_element_by_css_selector("#input-username").clear()
@@ -45,4 +53,20 @@ def test_admin_page(browser, base_url):
     browser.find_element_by_css_selector("#input-password").clear()
     browser.find_element_by_css_selector("#input-password").send_keys("bitnamy")
     browser.find_element_by_css_selector(".btn-primary").click()
+
+
+def test_add_product_cart(browser, base_url):
+    browser.get(base_url)
+    feature_product = browser.find_elements_by_css_selector("#content > div.row .product-layout")[0]
+    product_name = feature_product.find_element_by_css_selector(".caption h4 a").text
+    feature_product.click()
+    browser.find_element_by_css_selector("[data-original-title='Add to Wish List']").click()
+    browser.find_element_by_css_selector("a[title='My Account']").click()
+    browser.find_element_by_link_text("login").click()
+    browser.find_element_by_id("input-email").clear()
+    browser.find_element_by_id("input-email").send_keys("trew@gmail.com")
+    browser.find_element_by_css_selector("#input-password").clear()
+    browser.find_element_by_css_selector("#input-password").send_keys("test")
+    browser.find_element_by_css_selector("input[value='Login']").click()
+    browser.find_element_by_xpath("//*[@id= 'column-right']//*[text()= 'Wish List']").click()
 

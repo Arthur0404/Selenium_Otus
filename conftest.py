@@ -32,7 +32,7 @@ def browser(request):
     if browser == "chrome":
         options = webdriver.ChromeOptions()
         if headless: options.headless = True
-        driver = webdriver.Chrome(options=options)
+        driver = webdriver.Chrome("/usr/local/bin/chromedriver")
 
     elif browser == "firefox":
         options = webdriver.FirefoxOptions()
