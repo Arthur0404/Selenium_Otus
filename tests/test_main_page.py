@@ -69,4 +69,3 @@ def test_add_product_cart(browser, base_url):
     browser.find_element_by_css_selector("#input-password").send_keys("test")
     browser.find_element_by_css_selector("input[value='Login']").click()
     browser.find_element_by_xpath("//*[@id= 'column-right']//*[text()= 'Wish List']").click()
-
